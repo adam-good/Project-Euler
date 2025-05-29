@@ -26,7 +26,7 @@ struct BinaryTree<T: Ord> {
     root: Subtree<T>
 }
 
-impl <T: Ord> BinaryTree<T> {
+impl <T: Ord+Copy> BinaryTree<T> {
     fn new() -> Self {
         Self { root: Subtree::new() }
     }
@@ -42,9 +42,13 @@ impl <T: Ord> BinaryTree<T> {
     fn len(&self) -> usize {
         self.root.len()
     }
+
+    fn collect(&self) -> Vec<T> {
+        self.root.collect(None)
+    }
 }
 
-impl <T: Ord> Subtree<T> {
+impl <T: Ord+Copy> Subtree<T> {
     fn new() -> Self {
         Self { node: None }
     }
@@ -77,9 +81,25 @@ impl <T: Ord> Subtree<T> {
             Some(n) => 1 + n.left.len() + n.right.len()
         }
     }
+
+    fn collect(&self, v: Option<Vec<T>>) -> Vec<T> {
+        let mut result: Vec<T> = match v {
+            None => Vec::<T>::new(),
+            Some(x) => x
+        };
+        match &self.node {
+            None => (),
+            Some(n) => {
+                result = n.left.collect(Some(result));
+                result.push(n.value);
+                result = n.right.collect(Some(result))
+            },
+        }
+        return  result;
+    }
 }
 
-impl <T: Ord> BinNode<T> {
+impl <T: Ord+Copy> BinNode<T> {
     fn new(value: T) -> Self {
         Self { value: value, left: Subtree::new(), right: Subtree::new() }
     }
@@ -93,5 +113,17 @@ impl <T: Ord> BinNode<T> {
 mod tests {
     use super::*;
 
+    #[test]
+    fn sort() {
+        let input: Vec<i32> = vec![8,2,1,4,3,7,6,5,9,0];
+        let target: Vec<i32> = vec![0,1,2,3,4,5,6,7,8,9];
+        let mut tree = BinaryTree::<i32>::new();
 
+        for i in input{
+            tree.insert(i);
+        }
+        let result = tree.collect();
+
+        assert_eq!(result, target);
+    }
 }
