@@ -37,6 +37,7 @@ fn prime_sieve(n: u64) -> PrimeSieve {
     PrimeSieve { num: n, curr: 2, list: (2..n).collect() }
 }
 
+#[cfg(test)]
 mod tests {
     use super::*;
 
