@@ -2,7 +2,7 @@
 
 // NOTE: I wrote this because I misread a problem.
 //       it's crap but might be useful later
-struct PrimeSieve {
+pub struct PrimeSieve {
     num: u64,
     curr: u64,
     list: Vec<u64>
@@ -33,7 +33,7 @@ impl Iterator for PrimeSieve {
     }
 }
 
-fn prime_sieve(n: u64) -> PrimeSieve {
+pub fn prime_sieve(n: u64) -> PrimeSieve {
     PrimeSieve { num: n, curr: 2, list: (2..n).collect() }
 }
 

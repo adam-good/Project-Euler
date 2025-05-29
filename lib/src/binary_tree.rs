@@ -22,28 +22,28 @@ struct Subtree<T: Ord>{
 /// A Binary Tree Implementation
 /// - Values are ordered left to right
 /// - No duplicate values
-struct BinaryTree<T: Ord> {
+pub struct BinaryTree<T: Ord> {
     root: Subtree<T>
 }
 
 impl <T: Ord+Copy> BinaryTree<T> {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Self { root: Subtree::new() }
     }
 
-    fn insert(&mut self, value: T) {
+    pub fn insert(&mut self, value: T) {
         self.root.insert(value);
     }
 
-    fn has(&mut self, value: T) -> bool {
+    pub fn has(&mut self, value: T) -> bool {
         self.root.has(value)
     }
 
-    fn len(&self) -> usize {
+    pub fn len(&self) -> usize {
         self.root.len()
     }
 
-    fn collect(&self) -> Vec<T> {
+    pub fn collect(&self) -> Vec<T> {
         self.root.collect(None)
     }
 }
