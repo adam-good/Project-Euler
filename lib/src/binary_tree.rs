@@ -176,7 +176,11 @@ impl <T: Ord+Copy> Subtree<T> {
 
 impl <T: Ord+Copy> BinNode<T> {
     fn new(value: T) -> Self {
-        Self { value: value, left: Subtree::new(), right: Subtree::new() }
+        Self {
+            value: value, 
+            left: Subtree::new(),
+            right: Subtree::new()
+        }
     }
 
     fn bnew(value: T) -> Node<T> {

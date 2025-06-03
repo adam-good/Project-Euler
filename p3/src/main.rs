@@ -1,4 +1,4 @@
-use lib::prime_sieve::{prime_sieve, PrimeSieve};
+use lib::prime_sieve::prime_sieve;
 use lib::binary_tree::BinaryTree;
 
 
@@ -45,7 +45,7 @@ impl FactorTree {
             }
 
             if n == 1 {
-                self.tree.insert_left(n); // Do I care?
+                // self.tree.insert_left(n); // Do I care?
                 break;
             }
         };
